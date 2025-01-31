@@ -11,6 +11,12 @@ pipe = StableDiffusionXLPipeline.from_pretrained(
 )
 pipe.to("cuda")
 
+"""
+The SDXL model takes integer timesteps so we must use the original list
+of sigmas. original list of sigmas -> interpolated sigmas -> closure then
+uses sigma_to_t to convert these into integers.
+"""
+
 # We need to patch the scheduler and save the original list of sigmas
 pipe.scheduler.sigmas_original = pipe.scheduler.sigmas.clone().cpu().numpy()
 
@@ -23,4 +29,4 @@ for sampler_name in comfy_samplers:
     print(f"generating with {sampler_name} ...")
 
     image = pipe(prompt=prompt, comfy_sampler=sampler_name).images[0]
-    image.save(f"output/sdxl-{sampler_name}.png")
+    image.save(f"output2/sdxl-{sampler_name}.png")

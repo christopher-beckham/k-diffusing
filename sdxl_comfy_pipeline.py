@@ -841,7 +841,7 @@ class StableDiffusionXLPipeline(
 
     def sigma_to_time(self, sigma):
         orig_sigmas = torch.from_numpy(self.scheduler.sigmas_original[0:-1]).\
-            to(sigma.device)
+           to(sigma.device)
         orig_sigmas_reversed = torch.flip(orig_sigmas, (0,))
         dists = (sigma.log() - orig_sigmas_reversed.log()).abs()
         closest_t = dists.argmin()
@@ -1258,7 +1258,9 @@ class StableDiffusionXLPipeline(
                 if self.do_classifier_free_guidance and self.guidance_rescale > 0.0:
                     # Based on 3.4. in https://arxiv.org/pdf/2305.08891.pdf
                     noise_pred = rescale_noise_cfg(noise_pred, noise_pred_text, guidance_rescale=self.guidance_rescale)
-                
+
+                # IMPORTANT: k_diffusion schedulers assume the denoised image, not
+                # the predicted noise.
                 denoised = input - _sigma*noise_pred
 
                 return denoised

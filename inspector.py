@@ -13,3 +13,11 @@ def get_valid_samplers():
             print("  ...pass")
             valid_fn_names.append(name)
     return valid_fn_names
+
+if __name__ == '__main__':
+    template = """<tr>
+<td>sdxl - {name}<br /><img src="output/sdxl-{name}.png" width=400 /></td><td>flux - {name}<br /><img src="output/flux-dev-{name}.png" width=400 /></td>
+</tr>"""
+    sampler_names = get_valid_samplers()
+    for name in sampler_names:
+        print(template.format(name=name))

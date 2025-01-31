@@ -47,7 +47,6 @@ def to_d(x, sigma, denoised):
     """Converts a denoiser output to a Karras ODE derivative."""
     return (x - denoised) / utils.append_dims(sigma, x.ndim)
 
-
 def get_ancestral_step(sigma_from, sigma_to, eta=1.):
     """Calculates the noise level (sigma_down) to step down to and the amount
     of noise to add (sigma_up) when doing an ancestral sampling step."""
