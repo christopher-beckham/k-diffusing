@@ -1,18 +1,12 @@
-# repo title
+# k-diffusing
 
-You may find this repo interesting for the following reasons:
+An uncreative portmanteau between "k_diffusers" and "diffusers". You may find this repo interesting for the following reasons:
 - You want to debug samplers implemented in `diffusers` against those in `k-diffusion` or other frameworks. This can be very useful if you want to back-port certain samplers in other frameworks back into diffusers.
 - You prefer a more functional-style implementation of samplers rather than the more stateful (and IMO much more complicated) design of schedulers in `diffusers`.
 
-## Files
-
-See:
-- `sdxl_comfy_pipeline.py`: SDXL text-to-image pipeline that delegates to k-diffusion samplers.
-- `flux_comfy_pipeline.py`: same but for FLUX.
-
 ## Samples
 
-To generate samples, run either `python test.py` or `python test_flux.py`. In order for the pipelines to function correctly some hacks must be done.
+To generate samples, run either `python test.py` or `python test_flux.py`.
 
 Note that FLUX has a different theoretical parameterisation to denoising diffusion so this may explain the bad outputs for some of the schedulers below.
 
