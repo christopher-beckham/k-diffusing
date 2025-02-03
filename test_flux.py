@@ -15,9 +15,6 @@ pipe = FluxPipeline.from_pretrained("black-forest-labs/FLUX.1-dev", torch_dtype=
 pipe = pipe.to("cuda")
 #pipe.enable_model_cpu_offload() #save some VRAM by offloading the model to CPU. Remove this if you have enough GPU power
 
-# We need to patch the scheduler and save the original list of sigmas
-pipe.scheduler.sigmas_original = pipe.scheduler.sigmas.clone().cpu().numpy()
-
 comfy_samplers = get_valid_samplers()
 
 #prompt = "A cat holding a sign that says hello world"
